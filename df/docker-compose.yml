@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  df:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: df-calculator
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - DATABASE_PATH=./data/calculator.db
+      - NEXT_PUBLIC_APP_NAME=df
+      - TAX_RATE_DEFAULT=0.08
+    volumes:
+      - df-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  df-data:
+    driver: local
